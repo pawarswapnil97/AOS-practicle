@@ -1,0 +1,465 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AOS</title>
+</head>
+<body>
+
+    SLIP 6
+
+    Q1. A) Write an Android code to complete the following Array/List operations 
+    
+    1. Union 2. Intersection. 
+    
+    Activity_main.xml 
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TableRow
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:text="List1" />
+
+        <EditText
+            android:layout_height="50dp"
+            android:layout_width="100dp"
+            android:id="@+id/l1" />
+    </TableRow>
+
+    <TableRow
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:text="List2" />
+
+        <EditText
+            android:layout_height="50dp"
+            android:layout_width="100dp"
+            android:id="@+id/l2" />
+    </TableRow>
+
+    <TableRow
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:id="@+id/rg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/rd1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Union" />
+
+            <RadioButton
+                android:id="@+id/rd2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Intersection" />
+        </RadioGroup>
+
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="SHOW"
+            android:id="@+id/btn" />
+    </TableRow>
+</TableLayout>
+
+
+
+MainActivity.java package ----------------------------------------
+
+package com.example.myunionintersection;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class MainActivity extends AppCompatActivity {
+    EditText list1, list2;
+    String str1 = "", str2 = "";
+    RadioGroup rg;
+    RadioButton rd1, rd2;
+    Button btn;
+    ArrayList<String> l1, l2;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        rg = (RadioGroup) findViewById(R.id.rg);
+        btn = (Button) findViewById(R.id.btn);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                list1 = (EditText) findViewById(R.id.l1);
+                list2 = (EditText) findViewById(R.id.l2);
+                str1 = list1.getText().toString();
+                str2 = list2.getText().toString();
+
+                l1 = new ArrayList<String>(Collections.singleton(str1));
+                l2 = new ArrayList<String>(Collections.singleton(str2));
+
+                int id = rg.getCheckedRadioButtonId();
+                switch (id) {
+                    case R.id.rd1:
+                        l1.addAll(l2);
+                        Toast.makeText(MainActivity.this, "Union=" + l1.toString(), Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.rd2:
+                        l1.retainAll(l2);
+                        Toast.makeText(MainActivity.this, "Intersection=" + l1.toString(), Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        Toast.makeText(MainActivity.this, "Please select radio button", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    }
+}
+
+
+    
+
+
+B) Java Android Program to demonstrate login form with validation. ---------------------------------------
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/teal_700"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_centerInParent="true">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Email"
+            android:id="@+id/et1" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Password"
+            android:id="@+id/et2"
+            android:inputType="textPassword" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:background="#3f76ff"
+            android:textColor="#fff"
+            android:id="@+id/b" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Not a member? Sign in"
+            android:textAlignment="center"
+            android:textSize="30dp" />
+    </LinearLayout>
+</RelativeLayout>
+
+
+
+MainActivity.java package ---------------------------------------------------------------------------
+
+
+
+package com.example.myassignment_1;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        EditText et1 = (EditText) findViewById(R.id.et1);
+        EditText et2 = (EditText) findViewById(R.id.et2);
+        Button b = (Button) findViewById(R.id.b);
+
+        AwesomeValidation av = new AwesomeValidation(ValidationStyle.BASIC);
+
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String e1 = et1.getText().toString();
+                String e2 = et2.getText().toString();
+
+                av.addValidation(et1, "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", "invalid");
+                av.addValidation(et2, "\"[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$\"", "wrong pass");
+
+                if (e1.equals("") || e2.equals("")) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Invalid emailid ", Toast.LENGTH_SHORT);
+                    toast.setMargin(50, 50);
+                    toast.show();
+                } else {
+                    if (et1.equals("abc@gmail.com")) {
+                        if (et2.equals("abc12356")) {
+                            av.validate();
+                            {
+                                Toast toast = Toast.makeText(getApplicationContext(), "Invalid pass ", Toast.LENGTH_SHORT);
+                                toast.setMargin(50, 50);
+                                toast.show();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+}
+
+
+
+
+Q2 - Write a C program to map a given file in memory and display the contain of mapped file in reverse
+
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <sys/mman.h>
+    #include <sys/stat.h>
+    #include <fcntl.h>
+    #include <unistd.h>
+    
+    void reversePrint(char* data, size_t size) {
+        if (size == 0)
+            return;
+        
+        char* end = data + size - 1;
+        
+        while (end >= data) {
+            putchar(*end);
+            end--;
+        }
+    }
+    
+    int main() {
+        const char* filename = "example.txt"; // Replace with your file path
+        int fd = open(filename, O_RDONLY);
+        
+        if (fd == -1) {
+            perror("Error opening file");
+            return EXIT_FAILURE;
+        }
+        
+        struct stat fileStat;
+        if (fstat(fd, &fileStat) == -1) {
+            perror("Error getting file size");
+            close(fd);
+            return EXIT_FAILURE;
+        }
+        
+        size_t fileSize = fileStat.st_size;
+        
+        char* fileData = mmap(NULL, fileSize, PROT_READ, MAP_PRIVATE, fd, 0);
+        
+        if (fileData == MAP_FAILED) {
+            perror("Error mapping file");
+            close(fd);
+            return EXIT_FAILURE;
+        }
+        
+        close(fd);
+        
+        reversePrint(fileData, fileSize);
+        
+        if (munmap(fileData, fileSize) == -1) {
+            perror("Error unmapping file");
+            return EXIT_FAILURE;
+        }
+        
+        return EXIT_SUCCESS;
+    }
+    
+
+
+B)  Write a C program that behaves like a shell (command interpreter). It has 
+its own prompt say “NewShell$”. Any normal shell command is executed 
+from your shell by starting a child process to execute the system program 
+corresponding to the command. It should additionally interpret the following 
+command.
+
+i) list f - print name of all files in directory 
+ii) list n - print number of all entries 
+iii) list i - print name and inode of all files 
+
+#include <stdio.h>
+    #include <stdlib.h>
+    #include <unistd.h>
+    #include <sys/wait.h>
+    #include <string.h>
+    #include <dirent.h>
+    #include <sys/stat.h>
+    
+    #define MAX_COMMAND_LENGTH 1024
+    #define MAX_TOKENS 100
+    
+    void print_error(char *msg) {
+        perror(msg);
+        exit(1);
+    }
+    
+    void execute_command(char **args) {
+        pid_t pid = fork();
+        if (pid < 0) {
+            print_error("fork() failed");
+        } else if (pid == 0) {
+            if (execvp(args[0], args) < 0) {
+                print_error("execvp() failed");
+            }
+        } else {
+            wait(NULL);
+        }
+    }
+    
+    void list_files() {
+        DIR *dir = opendir(".");
+        if (!dir) {
+            print_error("opendir() failed");
+        }
+        struct dirent *entry;
+        while ((entry = readdir(dir)) != NULL) {
+            if (entry->d_type == DT_REG) {
+                printf("%s\n", entry->d_name);
+            }
+        }
+        closedir(dir);
+    }
+    
+    void list_entries() {
+        DIR *dir = opendir(".");
+        if (!dir) {
+            print_error("opendir() failed");
+        }
+        int count = 0;
+        struct dirent *entry;
+        while ((entry = readdir(dir)) != NULL) {
+            count++;
+        }
+        printf("Number of entries: %d\n", count);
+        closedir(dir);
+    }
+    
+    void list_inodes() {
+        DIR *dir = opendir(".");
+        if (!dir) {
+            print_error("opendir() failed");
+        }
+        struct dirent *entry;
+        while ((entry = readdir(dir)) != NULL) {
+            if (entry->d_type == DT_REG) {
+                struct stat st;
+                char filename[MAX_COMMAND_LENGTH];
+                sprintf(filename, "%s/%s", ".", entry->d_name);
+                if (stat(filename, &st) == 0) {
+                    printf("%s %lu\n", entry->d_name, st.st_ino);
+                } else {
+                    print_error("stat() failed");
+                }
+            }
+        }
+        closedir(dir);
+    }
+    
+    int main() {
+        char command[MAX_COMMAND_LENGTH];
+        char *tokens[MAX_TOKENS];
+        char *delim = " \t\n";
+        
+        while (1) {
+            printf("NewShell$ ");
+            if (fgets(command, MAX_COMMAND_LENGTH, stdin) == NULL) {
+                printf("\n");
+                exit(0);
+            }
+            int num_tokens = 0;
+            tokens[num_tokens] = strtok(command, delim);
+            while (tokens[num_tokens] != NULL) {
+                num_tokens++;
+                tokens[num_tokens] = strtok(NULL, delim);
+            }
+            
+            if (num_tokens == 0) {
+                continue;
+            }
+            
+            if (strcmp(tokens[0], "list") == 0) {
+                if (num_tokens < 2) {
+                    printf("Usage: list f|n|i\n");
+                    continue;
+                }
+                if (strcmp(tokens[1], "f") == 0) {
+                    list_files();
+                } else if (strcmp(tokens[1], "n") == 0) {
+                    list_entries();
+                } else if (strcmp(tokens[1], "i") == 0) {
+                    list_inodes();
+                } else {
+                    printf("Invalid option: %s\n", tokens[1]);
+                }
+            } else {
+                execute_command(tokens);
+            }
+        }
+        
+        return 0;
+    }
+    
+
+
+
+
+</body>
+</html>
